@@ -1,6 +1,8 @@
 # Frame Copy
 
-VSCode extension to copy video frames with timestamps for Claude Code feedback.
+VSCode extension to copy video frames with timestamps.
+
+![Example](example.png)
 
 ## Usage
 
