@@ -1,0 +1,52 @@
+{
+  "name": "frame-copy",
+  "displayName": "Frame Copy",
+  "description": "Copy video frames with timestamps for Claude Code feedback",
+  "version": "0.1.0",
+  "publisher": "your-publisher-name",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "customEditors": [
+      {
+        "viewType": "frameCopy.videoPlayer",
+        "displayName": "Video Player (Frame Copy)",
+        "selector": [
+          {
+            "filenamePattern": "*.mp4"
+          }
+        ],
+        "priority": "default"
+      }
+    ]
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/frame-copy"
+  },
+  "keywords": [
+    "video",
+    "frame",
+    "capture",
+    "screenshot",
+    "timestamp",
+    "claude",
+    "feedback"
+  ],
+  "license": "MIT"
+}

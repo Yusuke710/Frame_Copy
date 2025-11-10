@@ -1,0 +1,18 @@
+# Development files (exclude from .vsix package)
+.vscode/**
+.git/**
+.gitignore
+src/**
+tsconfig.json
+**/*.map
+**/*.ts
+
+# Dependencies (will be bundled separately if needed)
+node_modules/**
+
+# Test files
+script_final.mp4
+
+# Logs and temp files
+*.log
+.DS_Store
