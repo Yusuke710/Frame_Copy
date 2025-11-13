@@ -38,7 +38,9 @@ class VideoEditorProvider implements vscode.CustomReadonlyEditorProvider {
     button { padding: 8px 16px; background-color: var(--vscode-button-background); color: var(--vscode-button-foreground); border: none; cursor: pointer; border-radius: 2px; font-family: var(--vscode-font-family); font-size: 13px; }
     button:hover { background-color: var(--vscode-button-hoverBackground); }
     button:active { opacity: 0.8; }
-    #timestamp { font-family: var(--vscode-editor-font-family); font-size: 13px; color: var(--vscode-descriptionForeground); }
+    #timestamp { padding: 8px 16px; background-color: var(--vscode-button-secondaryBackground); color: var(--vscode-button-secondaryForeground); border: none; cursor: pointer; border-radius: 2px; font-family: var(--vscode-editor-font-family); font-size: 13px; }
+    #timestamp:hover { background-color: var(--vscode-button-secondaryHoverBackground); }
+    #timestamp:active { opacity: 0.8; }
     .flash { animation: flash 0.2s ease-in-out; }
     @keyframes flash { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
   </style>
@@ -47,7 +49,7 @@ class VideoEditorProvider implements vscode.CustomReadonlyEditorProvider {
   <video id="video" src="${videoSrc}" controls></video>
   <div class="controls">
     <button id="copy">Copy Frame</button>
-    <span id="timestamp">image at 0s</span>
+    <button id="timestamp">image at 0s</button>
   </div>
   <script nonce="${nonce}">
     const video = document.getElementById('video');
@@ -56,6 +58,16 @@ class VideoEditorProvider implements vscode.CustomReadonlyEditorProvider {
     video.addEventListener('timeupdate', () => {
       const s = Math.floor(video.currentTime);
       timestamp.textContent = \`image at \${s}s\`;
+    });
+
+    timestamp.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(timestamp.textContent);
+        timestamp.classList.add('flash');
+        setTimeout(() => timestamp.classList.remove('flash'), 200);
+      } catch (error) {
+        alert('Failed to copy timestamp: ' + error.message);
+      }
     });
 
     document.getElementById('copy').addEventListener('click', async () => {
